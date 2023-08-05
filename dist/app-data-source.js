@@ -4,7 +4,7 @@ import { defaults } from "./config.js";
 
 export const appDataSource = new DataSource({
     type: "postgres",
-    host: "postgres://root:4eCyXTpCEEaZsdjN59hi3Koinx0ewI11@dpg-cj6vltsl975s73cmnmeg-a.frankfurt-postgres.render.com",
+    host: "postgres://root:4eCyXTpCEEaZsdjN59hi3Koinx0ewI11@dpg-cj6vltsl975s73cmnmeg-a",
     port: 3306,
     username: "root",
     password: defaults.password,
