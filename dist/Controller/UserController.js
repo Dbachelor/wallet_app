@@ -2,13 +2,15 @@ import * as express from 'express';
 import { UserService } from '../Service/UserService.js';
 import { AuthService } from "../Service/AuthService.js";
 export class UserController {
+    
     constructor() {
         this.userService = new UserService();
         this.auth = new AuthService();
         this.user = express.request.headers.authorization && this.auth.getUser(express.request.headers.authorization.split(' ')[1]);
     }
-    index(req = express.request, res = express.response) {
-        res.status(200).send(this.userService.users());
+    async index(req = express.request, res = express.response) {
+        let uService = new UserService()
+        res.status(200).send(await uService.users());
     }
     async enableUser(req = express.request, res = express.response) {
         let result = await this.userService.enableUser(this.user.id);

@@ -13,6 +13,7 @@ const { index, enableUser, disableUser } = new UserController();
 // router.get('/', (req, res)=>{
 //     res.send("hello Tender")
 // })
+
 app.use(AuthMiddleware);
 router.get('/', index);
 router.post('/enable', enableUser);

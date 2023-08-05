@@ -5,6 +5,7 @@ export class AuthController {
         let authService = new AuthService();
         const { email, name, role, password } = req.body;
         let data = await authService.register(email, name, password, role);
+        console.log(data, '....')
         if (data == 201) {
             res.status(201).send({ success: true, data: { email: email, name: name, role: role } });
         }
@@ -16,12 +17,11 @@ export class AuthController {
         let authService = new AuthService();
         const { email, password } = req.body;
         let data = await authService.login(email, password);
-        console.log(data)
-        if (data.status == 200) {
+        console.log(data, '***')
+        if (data) {
             res.status(201).send({ success: true, data: { email: email, name: data.payload.name, role: data.payload.role, token: data.token } });
         }
-        else {
-            res.status(data['status']).send({ message: 'something went wrong', success: false });
+        else {res.status(500).send({ message: 'something went wrong', success: false });
         }
     }
 }

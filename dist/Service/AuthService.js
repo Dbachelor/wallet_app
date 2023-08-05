@@ -9,7 +9,7 @@ import pkg from 'jsonwebtoken';
 export class AuthService {
     async register(email, name, password, role) {
         let status = 200;
-        appDataSource.getRepository(User).findBy({ 'email': email }).then((res) => {
+        let res = await appDataSource.getRepository(User).findBy({ 'email': email })
             if (res.length > 0) {
                 status = 400;
             }
@@ -33,23 +33,27 @@ export class AuthService {
                     status = 201;
                 }
             }
-        });
+    
         return status;
     }
     async login(email, password) {
         let res;
-         appDataSource.getRepository(User).findOneBy({ "email": email }).then((data) => {
-            console.log(data)
+        let data = 
+         await appDataSource.getRepository(User).findOneBy({ "email": email })
             if (!data) {
-                
+                console.log(1)
                 res = { success: true, status: 404 };
+                return res
             }
             else {
+                console.log(2)
                 if (!this.verifyPassword(password, data.password)) {
+                    console.log(2.1)
                     res = { success: true, status: 403 };
                     return res
                 }
                 else {
+                    console.log(2.2)
                     let user = {
                         email: email,
                         id: data.id,
@@ -58,12 +62,15 @@ export class AuthService {
                     };
                     const token = this.createBearerToken(user);
                     // const decode = jwt.verify(token, secret_key)
-                    res = { success: true, status: 200, payload: Object.assign(Object.assign({}, user), { name: data.name, role: data.role }), token: token };
+                    res = { success: true, status: 200, payload: user, token: token };
+                    return res;
                 }
             }
-        });
-        return res;
+            
+   
+       
     }
+
     hashPassword(password) {
         let salt = bcrypt.genSaltSync();
         return bcrypt.hashSync(password, salt);
