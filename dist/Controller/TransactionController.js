@@ -5,7 +5,7 @@ export class TransactionController {
     constructor() {
         this.authService = new AuthService();
         this.transactionService = new TransactionService();
-        this.user = express.request.headers.authorization && this.authService.getUser(express.request.headers.authorization.split(' ')[1]);
+        //this.user = express.request.headers.authorization && this.authService.getUser(express.request.headers.authorization.split(' ')[1]);
     }
     async creditWallet(req = express.request, res = express.response) {
         let creditUserWallet = await this.transactionService.credit(this.user.id, req.body.amount);
