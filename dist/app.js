@@ -14,6 +14,10 @@ appDataSource
     .catch((err) => {
     console.error("Error during Data Source initialization:", err);
 });
+
+app.get('/', function(req, res){
+    res.send("wallet app");
+})
 // create and setup express app
 const app = express();
 app.use(express.json());
