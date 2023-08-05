@@ -1,5 +1,6 @@
-import { defaults } from "pg";
+
 import { DataSource } from "typeorm";
+import { defaults } from "./config";
 
 export const appDataSource = new DataSource({
     type: "mysql",
