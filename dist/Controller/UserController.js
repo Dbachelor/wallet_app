@@ -6,7 +6,7 @@ export class UserController {
     constructor() {
         this.userService = new UserService();
         this.auth = new AuthService();
-        this.user = express.request.headers.authorization && this.auth.getUser(express.request.headers.authorization.split(' ')[1]);
+        //this.user = express.request.headers.authorization && this.auth.getUser(express.request.headers.authorization.split(' ')[1]);
     }
     async index(req = express.request, res = express.response) {
         let uService = new UserService()
