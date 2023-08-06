@@ -19,6 +19,10 @@ await appDataSource
 // create and setup express app
 const app = express();
 app.use(express.json());
+app.use(cors({
+    origin: '*',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+  }))
 // register routes
 app.get('/', function(req, res){
     res.send("wallet app");
