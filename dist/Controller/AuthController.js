@@ -19,7 +19,7 @@ export class AuthController {
         let data = await authService.login(email, password);
         console.log(data, '***')
         if (data) {
-            res.status(201).send({ success: true, data: { email: email, name: data.payload.name, role: data.payload.role, wallet_id:data.payload.wallet_id}, token: data.token  });
+            res.status(201).send({ success: true, data: { email: email, name: data.payload.name, role: data.payload.role, wallet_id:data.payload.wallet_id, balance:data.payload.balance, enabled: data.payload.enabled}, token: data.token  });
         }
         else {res.status(500).send({ message: 'something went wrong', success: false });
         }

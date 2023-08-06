@@ -37,26 +37,25 @@ export class AuthService {
     async login(email, password) {
         let res;
         let data = 
-         await appDataSource.getRepository(User).findOneBy({ "email": email })
+         await appDataSource.getRepository(User).findOneBy({ "email": email, "enabled":1 })
             if (!data) {
-                console.log(1)
                 res = { success: true, status: 404 };
                 return res
             }
             else {
-                console.log(2)
                 if (!this.verifyPassword(password, data.password)) {
                     console.log(2.1)
                     res = { success: true, status: 403 };
                     return res
                 }
                 else {
-                    console.log(2.2)
                     let user = {
                         email: email,
                         id: data.id,
                         name: data.name,
-                        role: data.role
+                        role: data.role,
+                        enabled: data.enabled,
+                        balance: data.balance
                     };
                     const token = this.createBearerToken(user);
                     // const decode = jwt.verify(token, secret_key)
