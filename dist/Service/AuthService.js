@@ -15,12 +15,10 @@ export class AuthService {
             }
             else {
                 let last_id;
-                const data = appDataSource.getRepository(User)
-                    .createQueryBuilder('user')
-                    .select('id')
-                    .orderBy('user.id', 'DESC')
-                    .getOne();
-                let current_id = (data.id) + 1;
+                const data = await appDataSource.getRepository(User)
+                    .findOne({where:{},order: {id:'desc'}})
+                // console.log(data, '----')
+                let current_id = data?(data.id) + 1 : 0;
                 last_id = 'wallet_00' + current_id;
                 let create = appDataSource
                     .createQueryBuilder()

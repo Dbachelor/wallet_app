@@ -3,7 +3,6 @@ import { User } from "../entity/user.entity.js";
 export class UserService {
     async users() {
         const users = await appDataSource.getRepository(User).findBy({'role':2});
-        console.log(users, '...')
         return users;
     }
     async enableUser(id) {

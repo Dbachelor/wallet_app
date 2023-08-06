@@ -6,7 +6,7 @@ import { defaults } from "./config.js";
 import { TransactionRouter } from "./Route/transaction-route.js";
 const { register, login } = new AuthController();
 const {port} = defaults;
-appDataSource
+await appDataSource
     .initialize()
     .then(() => {
     console.log("Data Source has been initialized!");
